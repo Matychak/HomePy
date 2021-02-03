@@ -1,0 +1,90 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+    <section id="cart_items">
+		 <div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+            </div>
+            {% if products %}
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<form action="{% url 'cart' %}" method="POST">
+					{% csrf_token %}
+
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td class="cart_product">
+								<img src="{{ products.photo_main.url }}" alt="{{product.tittle}}">
+							</td>
+							<td class="cart_description">
+								<h4>{{ products.tittle }}</h4>
+								<input type="hidden" name="title" value="{{ products.tittle }}" />
+								<p>{{ products.sale }}</p>
+								<input type="hidden" name="sale" value="{{ products.sale }}" />
+
+							</td>
+							<td class="cart_price">
+								<p>${{ products.price }}</p>
+								<input type="hidden" name="price" value="{{ products.price }}" />
+
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									
+									<input class="cart_quantity_input" type="number" name="quantity" value="1" autocomplete="off" name="count" size="2" style="width:50px" >
+							
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price" name="price">${{ products.price }}</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+							</td>
+
+						
+						</tr>
+							</tbody>
+						
+				
+				</table>
+
+                <div class="btn-order" >
+				<button type="submit" class="brn btn-success">
+				    order
+				        </button>
+
+				         </div>
+
+				</form>
+
+            </div>
+            {% else %}
+            <div>
+                <h2>Your cart is empty.</h2>
+            </div>
+            {% endif  %}
+		</div> 	
+        {% for item in cart %}
+            {% with product=item.product %}
+
+                    <td>{{ item.tittle }}</td>
+
+            {% endwith %}
+        {% endfor %}
+
+	</section> <!--/#cart_items-->
+{% endblock %}

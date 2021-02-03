@@ -1,0 +1,5 @@
+1. Створити 10 користувачів в БД за допомогою  insert +
+2. Виіести всіх у кого понтова скринька на gmail + SELECT * FROM `users` WHERE `email` LIKE '%gmail%'
+3. Змінити пвроль користувачу ID 4 - UPDARE `-` SET `password` = 'value' WHERE `id`= 1
+4. Видалити користувача під іменем Bill (або якесь інше) DELETE FROM `users` WHERE `name` = 'Dima'
+5. Поеазати всіх користувачів у який ім'я починаэться на A + SELECT * FROM `users` WHERE `name` LIKE 'A%'
